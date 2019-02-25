@@ -10,4 +10,4 @@ class PostForm extends Component {
     }
 }
 
-export default componentName
+export default PostForm

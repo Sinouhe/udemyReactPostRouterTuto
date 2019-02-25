@@ -1,13 +1,53 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import{readAllPost} from '../actions/index';
+import PostListItem from '../components/post-list-item';
 
 class PosyList extends Component {
+
+    componentWillMount() {
+        this.props.readAllPost();
+    }
+
+    renderPosts() {
+        const {posts} = this.props;
+        if(posts) {
+            return posts.map((post) => {
+                return <PostListItem key={post.id} post={post}/>
+            })
+        }
+    }
+
     render () {
+        console.log(this.props.posts)
         return (
             <div>
                 <h1>liste des posts</h1>
+                <table className='table table-hover'>
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderPosts()}
+                    </tbody>
+                </table>
             </div>
         )
     }
 }
 
-export default PosyList
+const mapStateToProps = (state) => {
+    return {
+        posts: state.posts
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({readAllPost}, dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(PosyList)

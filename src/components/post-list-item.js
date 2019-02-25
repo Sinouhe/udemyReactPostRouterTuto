@@ -1,10 +1,12 @@
 import React from 'react'
 
-const PostListItem = () => {
+const PostListItem = (props) => {
+    const {post} = props
     return (
-        <div>
-            <h1>PostListItem</h1>
-        </div>
+        <tr>
+            <td>{post.title}</td>
+            <td><button className='btn btn-danger'>supprimer</button></td>
+        </tr>
     )
 }
 
