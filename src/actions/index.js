@@ -32,7 +32,7 @@ export function deletePost(id) {
     return function (dispatch) {
         axios.delete(`${END_POINT}/posts/${id}`)
                 .then((res) => {
-                    dispatch({type: AT_POSTS.DELETE, payload: res.data});
+                    dispatch({type: AT_POSTS.DELETE, payload: id});
                 })
                 .catch((err) => {
                     console.log('error index.js -> readPost '+ err.message);
